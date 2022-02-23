@@ -18,6 +18,8 @@ lazy val root = (project in file("."))
     libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC1" excludeAll(excludeSlf4jBinding),
     libraryDependencies += "org.tpolecat" %% "doobie-hikari" % "1.0.0-RC1" excludeAll(excludeSlf4jBinding), // HikariCP transactor.
     libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC1" excludeAll(excludeSlf4jBinding),
-      libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.10"
+      libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.10",
+      libraryDependencies += "dev.zio" %% "zio-json" % "0.1.5"
+
 
   )

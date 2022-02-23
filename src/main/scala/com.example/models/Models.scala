@@ -1,5 +1,7 @@
 package com.example.models
 
+import zio.json._
+
 import java.time.LocalDateTime
 
 object Models {
@@ -10,5 +12,10 @@ object Models {
       createdAt: Option[LocalDateTime],
       updatedAt: Option[LocalDateTime]
   )
+
+  object Lesson {
+    implicit val decoder: JsonDecoder[Lesson] = DeriveJsonDecoder.gen
+    implicit val encoder: JsonEncoder[Lesson] = DeriveJsonEncoder.gen
+  }
 
 }

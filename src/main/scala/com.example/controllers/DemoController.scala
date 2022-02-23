@@ -10,7 +10,7 @@ import cats.syntax.semigroup._
 import cats.Monoid
 import cats.instances.string._
 import org.springframework.http.{HttpStatus, ResponseEntity}
-import zio.ZLayer
+import zio.{Runtime, ZLayer}
 import zio.console.Console
 import zio.logging.Logging
 
@@ -22,10 +22,12 @@ class DemoController(lessonService: LessonService) {
 
   val backLayer = LessonService.live
 
+  val runtime = Runtime.default
 
   @GetMapping(Array("/demo"))
   def demo = {
-    ResponseEntity.ok().body(lessonService.postLesson(Models.Lesson(Some(1), "Chetan", None, None)))
+    val lessonRet = lessonService.postLesson(Models.Lesson(Some(1), "Chetan", None, None))
+    ResponseEntity.ok().body(runtime.unsafeRun(lessonRet))
   }
 
 }

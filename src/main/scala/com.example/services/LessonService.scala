@@ -29,8 +29,7 @@ class LessonService(@Autowired val ds: DataSource) {
       val ls = LessonService.postLesson(lesson)
         .map(u => u.transact(xa).unsafeRunSync())
         .provideCustomLayer(backLayer)
-
-    runtime.unsafeRun(ls)
+      ls
   }
 
 }

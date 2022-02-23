@@ -9,20 +9,23 @@ import com.example.models.Models
 import cats.syntax.semigroup._
 import cats.Monoid
 import cats.instances.string._
+import org.springframework.http.{HttpStatus, ResponseEntity}
+import zio.ZLayer
+import zio.console.Console
+import zio.logging.Logging
 
 @RestController
 @Autowired
 class DemoController(lessonService: LessonService) {
 
+  val logLayer = Logging.consoleErr()
+
+  val backLayer = LessonService.live
+
+
   @GetMapping(Array("/demo"))
   def demo = {
-    "Some" |+| " Scala " |+| "With Cats"
-    val a = Option(1)
-    for {
-      aVal <- a
-      value <- aVal * 2 if (aVal == 1)
-    } yield (value)
-    lessonService.postLesson(Models.Lesson(None, "Test Lesson", None, None))
+    ResponseEntity.ok().body(lessonService.postLesson(Models.Lesson(Some(1), "Chetan", None, None)))
   }
 
 }

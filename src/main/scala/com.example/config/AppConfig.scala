@@ -14,7 +14,7 @@ class AppConfig {
       .create()
       .username("postgres")
       .password("")
-      .url("jdbc:postgres://localhost/userdata")
+      .url("jdbc:postgres://localhost:5432/userdata")
       .driverClassName("org.postgresql.Driver")
       .build();
   }
